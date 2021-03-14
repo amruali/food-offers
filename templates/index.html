@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+    <title>Document</title>
+</head>
+<body>
+
+<div >
+    <div class="card">
+        <div class="card-body">
+            <a href="javascript:void(0)" class="btn btn-primary">
+                <img class="card-img" src="../static/images/img1.jpg" alt="Card image cap">
+                <div class="card-text height-1">العرض الاول</div>
+            </a>
+
+        </div>
+    </div>
+    <!-- Card -->
+</div>
+<!-- column -->
+<!-- column -->
+<div class = "card">
+    <div class="card-body">
+        <div class="card-body">
+            <a href="javascript:void(0)" >
+                <img class="card-img" src="../static/images/img2.jpg" alt="Card image cap">
+                <p id = "demo"></p>
+                <div class="card-text height-2">العرض الثاني</div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+
+$( document ).ready(function() {
+    
+    $.get( "http://localhost:8080/api/valid_site_offers", function( data)  {
+        let JsonObject = JSON.parse(data);
+        let discountValue = JsonObject["site_offer_discount_value"];
+        let discountType  = JsonObject["discount_type_id"]
+        let discountCode  = JsonObject["site_offer_code"]
+
+        let text = discountValue + " " + (discountType == 1 ? " &percnt; " : " L.E ") + "OFF " +
+            " Using Code \"" + discountCode +"\"";
+        console.log(text);
+        $( ".height-1" ).html(text)
+
+    });
+
+
+
+    $.get( "http://localhost:8080/api/valid_restaurant_offers", function( data){
+        let JsonObject = JSON.parse(data);
+        let discountValue = JsonObject[0]["restaurant_offer_discount_value"];
+        let discountType  = JsonObject[0]["discount_type_id"]
+        let discountCode  = JsonObject[0]["restaurant_offer_code"]
+        let restaurant    = JsonObject[0]["restaurant_id"]
+
+        let text = discountValue + " " + (discountType == 1 ? " &percnt; ": " L.E ") + "OFF " + "for Items in Restaurant "
+            + "X" + " Using Code \"" + discountCode +"\"";
+
+        $( ".height-2" ).html(text)
+    });
+
+});
+
+    </script>
+    
+</body>
+</html>

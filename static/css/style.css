@@ -1,0 +1,27 @@
+.card-img{
+    width : 25%;
+    height : 25%;
+    opacity: 65%;
+
+
+}
+.card-text
+{
+    position: absolute;
+    left: 47rem;
+    font-size: x-large;
+    font-family: system-ui;
+    color: #000;
+
+}
+.height-1{
+    top: 8rem;
+
+}
+.height-2{
+    top:28rem;
+}
+.card
+{
+    text-align:center;
+}
